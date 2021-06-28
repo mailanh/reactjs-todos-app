@@ -34,7 +34,7 @@ const Footer = memo((props) => {
             <ul className="filters">
                 {
                     filterBtns.map(btn => {
-                        return (<FilterBtn {...btn} />)
+                        return (<FilterBtn key={`btn${btn.title}`} {...btn} />)
                     })
                 }
             </ul>
