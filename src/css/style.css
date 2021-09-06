@@ -130,11 +130,17 @@ button {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.new-todo {
+.new-todo{
     padding: 16px 16px 16px 60px;
     border: none;
     background: rgba(0, 0, 0, 0.003);
     box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+}
+
+input:focus{
+    outline: none !important;
+    border:1px solid rgb(26 219 201 / 53%);
+    box-shadow: 0 0 10px rgb(26 219 201 / 53%);
 }
 
 .todoapp h1 {
@@ -181,7 +187,8 @@ button {
 }
 
 .toggle-all:checked + label:before {
-    color: #737373;
+    /* color: rgb(26 219 201 / 53%); */
+    color: rgb(108 199 182);
 }
 
 .main {
@@ -232,7 +239,8 @@ button {
 }
 
 .filters li a.selected {
-    border-color: rgba(175, 47, 47, 0.2);
+    border-color: rgb(26 219 201 / 53%);
+    color: rgb(26 219 201 / 53%);
 }
 .filters li a {
     color: inherit;

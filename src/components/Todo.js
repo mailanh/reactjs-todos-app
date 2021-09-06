@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 
 const Todo = memo((props) => {
-    const { todo, getTodoById, editTodoId, onEditTodo, index, markCompleted } = props;
+    const { todo, getTodoById, editTodoId, onEditTodo, index, markCompleted, removeTodoList } = props;
     const [text, setText] = useState(todo.text)
     const isEditing = editTodoId === todo.id
     const editTodo = () => {
@@ -12,18 +12,19 @@ const Todo = memo((props) => {
     }
     return (
         <li className={`${isEditing ? 'editing' : ''} ${todo.isCompleted ? 'completed' : ''}`}>
-            { !isEditing ?
+            {!isEditing ?
                 <div className="view">
                     <input
+                        title={!todo.isCompleted ? "Mark done" : "Un mark done"}
                         type="checkbox"
-                        defaultChecked={todo.isCompleted}
+                        checked={todo.isCompleted}
                         className="toggle"
-                        onchange={() => markCompleted(todo.id)}
+                        onChange={() => markCompleted(todo.id)}
                     />
-                    <label onDoubleClick={() => getTodoById(todo.id)}>{todo.text}</label>
-                    <button className="destroy"></button>
+                    <label onDoubleClick={() => getTodoById(todo.id)} autoFocus={true}>{todo.text}</label>
+                    <button title="Remove" className="destroy" onClick={() => {removeTodoList(todo.id)}}></button>
                 </div>
-                : <input
+                : (<input
                     type="text"
                     value={text}
                     className="edit"
@@ -34,7 +35,7 @@ const Todo = memo((props) => {
                             editTodo()
                         }
                     }}
-                />
+                />)
             }
 
         </li>

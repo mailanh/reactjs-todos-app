@@ -1,34 +1,34 @@
 import React, { memo } from 'react';
 
-const filterBtns =
-    [
-        {
-            title: 'All',
-            isActived: true,
-            link: '',
-            onClick: () => { }
-        },
-        {
-            title: 'Active',
-            isActived: false,
-            link: 'active',
-            onClick: () => { }
-        },
-        {
-            title: 'Completed',
-            isActived: false,
-            link: 'completed',
-            onClick: () => { }
-        }
-    ];
-
 const Footer = memo((props) => {
+    const { filterTodoList, status, clearCompleteTodoList, numOfTodos, numOfTodosLeft } = props;
+    const filterBtns =
+        [
+            {
+                title: 'All',
+                isActived: status === 'ALL',
+                link: '',
+                onClick: () => filterTodoList('ALL')
+            },
+            {
+                title: 'Active',
+                isActived: status === 'ACTIVE',
+                link: 'active',
+                onClick: () => filterTodoList('ACTIVE')
+            },
+            {
+                title: 'Completed',
+                isActived: status === 'COMPLETED',
+                link: 'completed',
+                onClick: () => filterTodoList('COMPLETED')
+            }
+        ];
     return (
         <footer className="footer">
             <span className="todo-count">
-                <strong>1</strong>
+                <strong>{numOfTodosLeft}</strong>
                 <span> </span>
-                <span>items</span>
+                <span>{numOfTodosLeft <= 1 ? 'item' : 'items'}</span>
                 <span> left</span>
             </span>
             <ul className="filters">
@@ -38,7 +38,8 @@ const Footer = memo((props) => {
                     })
                 }
             </ul>
-            <button className="clear-completed">Clear completed</button>
+            {numOfTodos > numOfTodosLeft && <button className="clear-completed" onClick={clearCompleteTodoList}>Clear completed</button>}
+
         </footer>
     )
 })
